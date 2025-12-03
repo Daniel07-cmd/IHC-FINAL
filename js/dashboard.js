@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Cabecera
             doc.setFontSize(18);
-            doc.text("MI TIENDA PROTOTIPO", 105, 20, null, null, "center");
+            doc.text("FUENTE DE LA VIDA", 105, 20, null, null, "center");
             
             doc.setFontSize(10);
             doc.text("Dirección: Av. Universitaria 123, Lima", 105, 26, null, null, "center");
