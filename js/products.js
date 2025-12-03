@@ -1,229 +1,94 @@
-document.addEventListener('DOMContentLoaded', () => {
+// ... (Toda tu lógica anterior de products.js se queda igual) ...
 
-    // Precio fijo de envío (Manejado por el backend después)
-    const SHIPPING_COST = 10.00;
+// === NUEVA LÓGICA: GENERACIÓN DE BOLETA DE VENTA EN CHECKOUT ===
+const checkoutForm = document.getElementById('checkoutForm');
 
-    /**
-     * FUNCIÓN CENTRAL: Recalcula todos los valores del resumen del pedido.
-     */
-    const updateCartSummary = () => {
-        let subtotal = 0;
-        // Selecciona solo los ítems visibles (no eliminados)
-        const visibleItems = document.querySelectorAll('.cart-item:not([style*="display: none"])');
+if (checkoutForm) {
+    checkoutForm.addEventListener('submit', (e) => {
+        e.preventDefault(); // Evita que recargue la página inmediatamente
+
+        // 1. Obtener valores de los inputs
+        const nombre = document.getElementById('clientName').value;
+        const email = document.getElementById('clientEmail').value;
+        const direccion = document.getElementById('clientAddress').value;
+        const ciudad = document.getElementById('clientCity').value;
+        const telefono = document.getElementById('clientPhone').value;
+        const metodoPago = document.getElementById('paymentMethod').options[document.getElementById('paymentMethod').selectedIndex].text;
+
+        // 2. Obtener valores monetarios (del resumen en pantalla)
+        // Usamos textContent porque estos valores pueden haber cambiado por tu lógica de carrito
+        const subtotalTxt = document.getElementById('displaySubtotal') ? document.getElementById('displaySubtotal').textContent : "S/ 0.00";
+        const envioTxt = document.getElementById('displayShipping') ? document.getElementById('displayShipping').textContent : "S/ 0.00";
+        const totalTxt = document.getElementById('displayTotal') ? document.getElementById('displayTotal').textContent : "S/ 0.00";
+
+        // 3. Generar PDF
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+
+        // --- DISEÑO DEL PDF ---
         
-        visibleItems.forEach(item => {
-            const priceElement = item.querySelector('.item-actions .detail-price');
-            if (priceElement) {
-                const totalText = priceElement.textContent.replace('S/ ', '').trim();
-                const total = parseFloat(totalText);
-                
-                if (!isNaN(total)) {
-                    subtotal += total;
-                }
+        // Cabecera
+        doc.setFontSize(20);
+        doc.text("COMPROBANTE DE PAGO", 105, 20, null, null, "center");
+        doc.setFontSize(10);
+        doc.text("Tienda Online Prototipo", 105, 26, null, null, "center");
+        doc.text(`Fecha: ${new Date().toLocaleDateString()} - Hora: ${new Date().toLocaleTimeString()}`, 105, 32, null, null, "center");
+
+        // Línea divisoria
+        doc.setLineWidth(0.5);
+        doc.line(20, 38, 190, 38);
+
+        // Datos del Cliente (Recuadro)
+        doc.setFillColor(245, 245, 245);
+        doc.rect(20, 45, 170, 45, 'F');
+        
+        doc.setFontSize(11);
+        doc.setFont(undefined, 'bold');
+        doc.text("INFORMACIÓN DE ENVÍO", 25, 55);
+        
+        doc.setFont(undefined, 'normal');
+        doc.setFontSize(10);
+        doc.text(`Cliente: ${nombre}`, 25, 65);
+        doc.text(`Email: ${email}`, 25, 71);
+        doc.text(`Teléfono: ${telefono}`, 25, 77);
+        doc.text(`Dirección: ${direccion} - ${ciudad}`, 25, 83);
+
+        // Tabla de Detalle (Simulada con los totales)
+        doc.autoTable({
+            startY: 100,
+            head: [['Descripción', 'Monto']],
+            body: [
+                ['Subtotal Productos', subtotalTxt],
+                ['Costo de Envío', envioTxt],
+                ['Método de Pago', metodoPago]
+            ],
+            theme: 'grid',
+            headStyles: { fillColor: [44, 62, 80] },
+            columnStyles: {
+                0: { cellWidth: 120 },
+                1: { halign: 'right', fontStyle: 'bold' }
             }
         });
 
-        // Lógica de Envío: Solo se cobra si hay productos (Subtotal > 0).
-        let finalShippingCost = 0;
-        let totalToPay = 0;
-        
-        if (subtotal > 0) {
-            finalShippingCost = SHIPPING_COST;
-            totalToPay = subtotal + finalShippingCost;
-        } 
+        // Total Grande
+        const finalY = doc.lastAutoTable.finalY;
+        doc.setFontSize(14);
+        doc.setFont(undefined, 'bold');
+        doc.text(`TOTAL PAGADO: ${totalTxt}`, 190, finalY + 15, null, null, "right");
 
-        // 1. ACTUALIZAR EL SUBTOTAL Y EL CONTADOR DE PRODUCTOS
-        const summarySubtotal = document.querySelector('.cart-summary .summary-item:first-child span:last-child');
-        const summaryItemCount = document.querySelector('.cart-summary .summary-item:first-child span:first-child');
-        
-        if (summarySubtotal) {
-            summarySubtotal.textContent = `S/ ${subtotal.toFixed(2)}`;
-        }
-        if (summaryItemCount) {
-            // Esto asegura que el texto se actualice dinámicamente.
-            summaryItemCount.textContent = `Subtotal (${visibleItems.length} producto${visibleItems.length !== 1 ? 's' : ''})`;
-        }
+        // Mensaje final
+        doc.setFontSize(9);
+        doc.setFont(undefined, 'normal');
+        doc.setTextColor(100);
+        doc.text("Gracias por su compra. Su pedido ha sido confirmado.", 105, finalY + 30, null, null, "center");
 
-        // 2. Actualizar el costo de Envío
-        const summaryShippingCost = document.querySelector('.cart-summary .summary-item:nth-child(2) span:last-child');
-        if (summaryShippingCost) {
-            summaryShippingCost.textContent = `S/ ${finalShippingCost.toFixed(2)}`;
-        }
+        // 4. Descargar PDF
+        doc.save(`Pedido_${nombre.split(' ')[0]}_${Date.now()}.pdf`);
 
-        // 3. Actualizar el TOTAL
-        const summaryTotalValue = document.querySelector('.cart-summary .summary-total span:last-child');
-        
-        if (summaryTotalValue) {
-            summaryTotalValue.textContent = `S/ ${totalToPay.toFixed(2)}`;
-        }
-
-        // 4. Actualizar botones de pago
-        const checkoutButton = document.querySelector('.btn-primary[href="checkout.html"]'); 
-        const finalPayButton = document.querySelector('.checkout-page button.btn-primary'); 
-
-        // Botón en la página del carrito
-        if (checkoutButton) {
-            if (totalToPay === 0) {
-                 checkoutButton.classList.add('btn-secondary'); 
-                 checkoutButton.classList.remove('btn-primary');
-                 checkoutButton.textContent = 'Tu Carrito Está Vacío';
-                 checkoutButton.href = '#'; 
-            } else {
-                 checkoutButton.classList.add('btn-primary');
-                 checkoutButton.classList.remove('btn-secondary');
-                 checkoutButton.textContent = 'Proceder al Pago';
-                 checkoutButton.href = 'checkout.html';
-            }
-        }
-        
-        // Botón en la página de checkout
-        if (finalPayButton) {
-            if (totalToPay === 0) {
-                finalPayButton.disabled = true;
-                finalPayButton.textContent = 'No hay nada que pagar';
-            } else {
-                finalPayButton.disabled = false;
-                finalPayButton.textContent = `Confirmar Pedido y Pagar S/ ${totalToPay.toFixed(2)}`;
-            }
-        }
-    };
-
-    // --- LÓGICA DE DETALLE DE PRODUCTO (quantity-control en product_detail.html) ---
-    const productDetailPage = document.querySelector('.product-detail-page');
-    if (productDetailPage) {
-        const quantityControlDetail = productDetailPage.querySelector('.quantity-control');
-        const addToCartBtn = productDetailPage.querySelector('.add-to-cart-btn');
-
-        if (quantityControlDetail) {
-            const minusBtn = quantityControlDetail.querySelector('#minusBtn');
-            const plusBtn = quantityControlDetail.querySelector('#plusBtn');
-            // La variable quantitySpan es necesaria para leer el valor
-            const quantitySpan = quantityControlDetail.querySelector('#quantity'); 
-            
-            if (minusBtn && plusBtn && quantitySpan) {
-                let quantity = parseInt(quantitySpan.textContent);
-
-                minusBtn.addEventListener('click', () => {
-                    if (quantity > 1) {
-                        quantity--;
-                        quantitySpan.textContent = quantity;
-                    }
-                });
-
-                plusBtn.addEventListener('click', () => {
-                    quantity++;
-                    quantitySpan.textContent = quantity;
-                });
-            }
-        }
-        
-        // LÓGICA DE AÑADIR AL CARRITO: Ahora solo redirige. El backend se encargará de añadir.
-        if (addToCartBtn) {
-            addToCartBtn.addEventListener('click', (event) => {
-                event.preventDefault();
-                // Aquí el backend tomaría el valor de quantitySpan y haría la llamada.
-                // Nosotros solo redirigimos a la página del carrito:
-                window.location.href = 'cart.html';
-            });
-        }
-    }
-
-
-    // --- LÓGICA DE CARRITO (Eliminar y Cantidad en cart.html) ---
-    const cartItems = document.querySelectorAll('.cart-item');
-    cartItems.forEach(item => {
-        
-        const removeLink = item.querySelector('.item-actions a');
-        const minusBtn = item.querySelector('.item-quantity .quantity-control button:first-child');
-        const plusBtn = item.querySelector('.item-quantity .quantity-control button:last-child');
-        const quantitySpan = item.querySelector('.item-quantity .quantity-control span');
-        const priceElement = item.querySelector('.item-actions .detail-price');
-        
-        // Extraer precio unitario
-        const unitPriceText = item.querySelector('.item-details p') ? item.querySelector('.item-details p').textContent : "S/ 0.00 c/u";
-        const unitPrice = parseFloat(unitPriceText.replace('S/ ', '').replace(' c/u', ''));
-        
-        // Función para recalcular total del item y el resumen
-        const updateItemTotal = () => {
-            let quantity = parseInt(quantitySpan.textContent);
-            const newTotal = (quantity * unitPrice).toFixed(2);
-            priceElement.textContent = `S/ ${newTotal}`;
-            updateCartSummary(); 
-        };
-
-        // 1. Funcionalidad de Eliminación
-        if (removeLink) {
-            removeLink.addEventListener('click', (event) => {
-                event.preventDefault();
-                item.style.opacity = 0;
-                item.style.height = 0;
-                item.style.marginBottom = 0;
-                item.style.paddingTop = 0;
-                item.style.paddingBottom = 0;
-                item.style.borderBottom = 'none';
-                
-                setTimeout(() => {
-                    item.style.display = 'none'; 
-                    updateCartSummary(); 
-                }, 300);
-            });
-        }
-        
-        // 2. Funcionalidad de Cantidad (Aumentar/Restar)
-        if (minusBtn && plusBtn && quantitySpan && priceElement && unitPrice) {
-
-            minusBtn.addEventListener('click', () => {
-                let quantity = parseInt(quantitySpan.textContent);
-                if (quantity > 1) {
-                    quantity--;
-                    quantitySpan.textContent = quantity;
-                    updateItemTotal();
-                }
-            });
-
-            plusBtn.addEventListener('click', () => {
-                let quantity = parseInt(quantitySpan.textContent);
-                quantity++;
-                quantitySpan.textContent = quantity;
-                updateItemTotal();
-            });
-        }
+        // 5. Redirección (Simulada con un pequeño retraso para asegurar la descarga)
+        setTimeout(() => {
+            alert("¡Pago exitoso! Se ha descargado tu comprobante.");
+            window.location.href = 'confirmation.html';
+        }, 1500);
     });
-
-    // INICIALIZACIÓN: Ejecuta el resumen al cargar la página para actualizar el contador inicial.
-    if (document.querySelector('.cart-page')) {
-        updateCartSummary();
-    }
-
-
-    // --- LÓGICA DE BÚSQUEDA Y CATEGORÍAS ---
-
-    // LÓGICA DE BÚSQUEDA (Eliminar búsqueda reciente)
-    const searchHistoryItems = document.querySelectorAll('.search-history-item button');
-    searchHistoryItems.forEach(button => {
-        if (button.textContent.trim() === '✕' || button.textContent.trim() === 'x' || button.textContent.trim() === '×') {
-             button.addEventListener('click', () => {
-                const parentItem = button.closest('.search-history-item');
-                if (parentItem) {
-                    parentItem.style.opacity = 0;
-                    setTimeout(() => parentItem.remove(), 200);
-                }
-            });
-        }
-    });
-
-    // LÓGICA DE CATEGORÍAS (Redirección/Simulación)
-    const categoryNav = document.querySelector('.category-nav');
-    if (categoryNav) {
-        const categoryLinks = categoryNav.querySelectorAll('a');
-        categoryLinks.forEach(link => {
-            link.addEventListener('click', (event) => {
-                event.preventDefault();
-                
-                categoryLinks.forEach(l => l.classList.remove('active-category'));
-                link.classList.add('active-category');
-            });
-        });
-    }
-
-});
+}

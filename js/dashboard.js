@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
             doc.text("FUENTE DE LA VIDA", 105, 20, null, null, "center");
             
             doc.setFontSize(10);
-            doc.text("Dirección: Av. Universitaria 123, Lima", 105, 26, null, null, "center");
+            doc.text("Dirección: Cajamarca ", 105, 26, null, null, "center");
             doc.text("RUC: 20123456789", 105, 30, null, null, "center");
 
             // Cuadro del Tipo de Comprobante
