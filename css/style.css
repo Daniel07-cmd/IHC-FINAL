@@ -1,0 +1,136 @@
+/* Variables de Color (Paleta Personalizada de tus Mockups) */
+:root {
+    /* CAMBIO: Color primario (Azul) ajustado a #305BAB */
+    --color-primary: #305BAB; 
+    
+    /* CAMBIO: Color secundario (Amarillo) ajustado a #FFC857 */
+    --color-secondary: #FFC857; 
+    
+    --color-background: #fdfdfd; /* Fondo muy claro */
+    --color-container-bg: #ffffff; /* Fondo de contenedores principal */
+    --color-text-dark: #212529; /* Negro para texto principal */
+    --color-text-light: #495057; /* Gris oscuro para texto secundario */
+    --color-border: #e9ecef; /* Borde muy suave */
+    --color-input-bg: #f8f9fa; /* Fondo de inputs muy suave */
+}
+
+/* Estilos de Reset y Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/* Estilos de Tipografía y Encabezados */
+h1, h2 {
+    color: var(--color-text-dark);
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+h1 { font-size: 32px; }
+h2 { font-size: 24px; }
+.subtitle {
+    color: var(--color-text-light);
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+/* --- Botones --- */
+.btn {
+    display: inline-block;
+    padding: 12px 25px;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    border-radius: 4px; 
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 16px;
+    box-shadow: none;
+}
+
+.btn-primary {
+    background-color: var(--color-primary); /* Ahora es #305BAB */
+    color: white;
+}
+
+.btn-primary:hover {
+    /* Color de hover ajustado a un azul más oscuro basado en #305BAB */
+    background-color: #264989; 
+}
+
+.btn-secondary {
+    background-color: var(--color-secondary); /* Ahora es #FFC857 */
+    color: var(--color-text-dark); 
+}
+.btn-secondary:hover {
+    /* Color de hover ajustado a un amarillo más oscuro basado en #FFC857 */
+    background-color: #e6b04e;
+}
+
+/* --- Formularios y Inputs (Para Login/Register) --- */
+
+input[type="text"], input[type="email"], input[type="password"], input[type="number"] {
+    border: 1px solid var(--color-border);
+    background-color: var(--color-input-bg);
+}
+
+input:focus {
+    border-color: var(--color-primary);
+    outline: 1px solid var(--color-primary);
+    background-color: white;
+}
+
+/* --- Landing Page --- */
+.landing-page header {
+    padding: 80px 30px 40px;
+}
+.landing-page .logo {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 20px;
+}
+
+/* --- Login/Register Page Layout --- */
+.auth-page {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    width: 100%;
+    max-width: 1280px;
+}
+.auth-page header {
+    padding: 20px 0;
+}
+.auth-page .logo {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px;
+}
+
+
+/* BACK BUTTON */
+.back-button {
+    text-decoration: none;
+    color: var(--color-text-dark);
+    font-weight: 500;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    padding: 20px 40px 10px 40px; 
+    align-self: flex-start;
+}
+.back-button .arrow {
+    font-size: 20px;
+    margin-right: 8px;
+}
+
+/* Utility classes */
+.detail-price {
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--color-primary);
+    margin-bottom: 20px;
+}

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Empleados</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Se asume que estos archivos CSS están presentes en tu estructura de carpetas -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+
+    <style>
+        /* Estilo para el efecto hover de las tarjetas de acción */
+        .action-card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+            transition: all 0.3s ease;
+            border-color: var(--bs-primary) !important;
+        }
+    </style>
+</head>
+<body class="bg-light">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top mb-4">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">
+                📊 Panel Administrativo
+            </a>
+            <div class="d-flex align-items-center">
+                <span class="text-white me-3 d-none d-md-block">Bienvenido <strong>Administrador</strong></span>
+                <a href="login_employee.html" class="btn btn-outline-danger btn-sm rounded-pill px-3">
+                    Cerrar Sesión
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container pb-5">
+
+        <!-- 1. Tarjetas de Métricas -->
+        <section class="row g-3 mb-4">
+            <div class="col-12 col-md-4">
+                <div class="card border-0 shadow-sm h-100 border-start border-4 border-success">
+                    <div class="card-body d-flex align-items-center">
+                        <div class="bg-success bg-opacity-10 text-success p-3 rounded-circle me-3 fs-4">💰</div>
+                        <div>
+                            <p class="text-muted small mb-0 fw-bold">INGRESOS DEL DÍA</p>
+                            <h3 class="fw-bold mb-0">S/ 4,500.50</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-4">
+                <div class="card border-0 shadow-sm h-100 border-start border-4 border-primary">
+                    <div class="card-body d-flex align-items-center">
+                        <div class="bg-primary bg-opacity-10 text-primary p-3 rounded-circle me-3 fs-4">📦</div>
+                        <div>
+                            <p class="text-muted small mb-0 fw-bold">PRODUCTOS VENDIDOS</p>
+                            <h3 class="fw-bold mb-0">210 und.</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-4">
+                <div class="card border-0 shadow-sm h-100 border-start border-4 border-warning">
+                    <div class="card-body d-flex align-items-center">
+                        <div class="bg-warning bg-opacity-10 text-warning p-3 rounded-circle me-3 fs-4">📚</div>
+                        <div>
+                            <p class="text-muted small mb-0 fw-bold">INVENTARIO CRÍTICO</p>
+                            <h3 class="fw-bold mb-0 text-danger">12 ítems</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Gráfico de Ventas y Acciones Rápidas -->
+        <div class="row g-4">
+            
+            <!-- Gráfico (idéntico al original) -->
+            <div class="col-12 col-lg-8">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-header bg-white border-0 pt-4 px-4">
+                        <h5 class="fw-bold mb-0">📈 Ventas de Últimos 6 Meses</h5>
+                    </div>
+                    <div class="card-body p-4">
+                        
+                        <div class="d-flex justify-content-between align-items-end" style="height: 250px;">
+                            
+                            <div class="d-flex flex-column justify-content-end align-items-center h-100" style="width: 12%;">
+                                <div class="bg-primary opacity-50 rounded-top w-100" style="height: 50%;" title="S/ 10k"></div>
+                                <small class="mt-2 text-muted" style="font-size: 11px;">Ene</small>
+                            </div>
+
+                            <div class="d-flex flex-column justify-content-end align-items-center h-100" style="width: 12%;">
+                                <div class="bg-primary opacity-75 rounded-top w-100" style="height: 80%;" title="S/ 16k"></div>
+                                <small class="mt-2 text-muted" style="font-size: 11px;">Feb</small>
+                            </div>
+
+                            <div class="d-flex flex-column justify-content-end align-items-center h-100" style="width: 12%;">
+                                <div class="bg-primary opacity-50 rounded-top w-100" style="height: 65%;" title="S/ 13k"></div>
+                                <small class="mt-2 text-muted" style="font-size: 11px;">Mar</small>
+                            </div>
+
+                            <div class="d-flex flex-column justify-content-end align-items-center h-100" style="width: 12%;">
+                                <div class="bg-primary rounded-top shadow w-100" style="height: 95%;" title="S/ 19k"></div>
+                                <small class="mt-2 fw-bold text-primary" style="font-size: 11px;">Abr</small>
+                            </div>
+
+                            <div class="d-flex flex-column justify-content-end align-items-center h-100" style="width: 12%;">
+                                <div class="bg-primary opacity-75 rounded-top w-100" style="height: 70%;" title="S/ 14k"></div>
+                                <small class="mt-2 text-muted" style="font-size: 11px;">May</small>
+                            </div>
+
+                            <div class="d-flex flex-column justify-content-end align-items-center h-100" style="width: 12%;">
+                                <div class="bg-primary opacity-25 rounded-top w-100" style="height: 40%;" title="S/ 8k"></div>
+                                <small class="mt-2 text-muted" style="font-size: 11px;">Jun</small>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Acciones Rápidas (SOLO Inventario y Reportes) -->
+            <div class="col-12 col-lg-4">
+                <div class="card border-0 shadow-sm h-100 bg-white">
+                    <div class="card-header bg-white border-0 pt-4 px-4">
+                        <h5 class="fw-bold mb-0">⚡ Acciones Rápidas</h5>
+                    </div>
+                    <div class="card-body p-4 d-grid gap-3">
+                        
+                        <!-- Opción 1: Inventario -->
+                        <a href="#" class="card action-card-hover text-decoration-none border shadow-sm">
+                            <div class="card-body d-flex align-items-center">
+                                <span class="fs-2 me-3">📝</span>
+                                <div>
+                                    <h6 class="fw-bold text-dark mb-0">Inventario</h6>
+                                    <small class="text-muted">Gestionar stock</small>
+                                </div>
+                            </div>
+                        </a>
+                        
+                        <!-- Opción 2: Reportes -->
+                        <a href="#" class="card action-card-hover text-decoration-none border shadow-sm">
+                            <div class="card-body d-flex align-items-center">
+                                <span class="fs-2 me-3">📊</span>
+                                <div>
+                                    <h6 class="fw-bold text-dark mb-0">Reportes</h6>
+                                    <small class="text-muted">Ver estadísticas</small>
+                                </div>
+                            </div>
+                        </a>
+                        
+                        <!-- La opción de Generar Boleta/Factura ha sido eliminada -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Últimas Transacciones -->
+        <section class="mt-4">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-white border-0 pt-4 px-4 pb-0 d-flex justify-content-between align-items-center">
+                    <h5 class="fw-bold mb-0">🕒 Últimas 5 Transacciones</h5>
+                    <button class="btn btn-sm btn-outline-primary">Ver todas</button>
+                </div>
+                <div class="card-body p-4">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Cliente</th>
+                                    <th>Documento</th>
+                                    <th class="text-end">Monto</th>
+                                    <th class="text-center">Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="fw-bold text-secondary">#V001</td>
+                                    <td>Ana Lopez</td>
+                                    <td><span class="badge bg-light text-dark border">Boleta</span></td>
+                                    <td class="text-end fw-bold">S/ 77.90</td>
+                                    <td class="text-center"><span class="badge bg-success-subtle text-success">Pagado</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold text-secondary">#V002</td>
+                                    <td>P. Rivas</td>
+                                    <td><span class="badge bg-light text-dark border">Factura</span></td>
+                                    <td class="text-end fw-bold">S/ 150.00</td>
+                                    <td class="text-center"><span class="badge bg-success-subtle text-success">Pagado</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold text-secondary">#V003</td>
+                                    <td>M. Salas</td>
+                                    <td><span class="badge bg-light text-dark border">Boleta</span></td>
+                                    <td class="text-end fw-bold">S/ 12.50</td>
+                                    <td class="text-center"><span class="badge bg-warning-subtle text-warning text-dark-emphasis">Pendiente</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold text-secondary">#V004</td>
+                                    <td>R. Gómez</td>
+                                    <td><span class="badge bg-light text-dark border">Boleta</span></td>
+                                    <td class="text-end fw-bold">S/ 45.90</td>
+                                    <td class="text-center"><span class="badge bg-success-subtle text-success">Pagado</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold text-secondary">#V005</td>
+                                    <td>E. Torres</td>
+                                    <td><span class="badge bg-light text-dark border">Factura</span></td>
+                                    <td class="text-end fw-bold">S/ 210.00</td>
+                                    <td class="text-center"><span class="badge bg-success-subtle text-success">Pagado</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Scripts de Bootstrap y custom (asumiendo que están presentes) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/dashboard.js"></script>
+</body>
+</html>

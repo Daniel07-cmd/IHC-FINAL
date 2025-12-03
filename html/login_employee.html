@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión Administrador</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/auth.css">
+</head>
+<body class="bg-light">
+
+    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+        
+        <div class="col-12 col-md-8 col-lg-5 col-xl-4">
+            
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-body p-4 p-md-5">
+                    
+                    <div class="mb-4">
+                        <a href="../index.html" class="text-decoration-none text-secondary fw-bold small">
+                            &larr; Volver a selección
+                        </a>
+                    </div>
+
+                    <header class="text-center mb-4">
+                        <img src="../images/logo.png" alt="Logo" class="img-fluid mb-3" style="max-height: 80px;">
+                        <h2 class="fw-bold text-dark">Acceso Administrador</h2>
+                        <p class="text-secondary small">Sistema Administrativo Interno</p>
+                    </header>
+                    
+                    <form id="employeeLoginForm">
+                        
+                        <div class="mb-3">
+                            <label for="userCode" class="form-label small fw-bold text-muted">CÓDIGO DE ADMINISTRADOR</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0">💼</span>
+                                <input type="text" id="userCode" class="form-control border-start-0 ps-0 bg-light" placeholder="Ej. EJP-001" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="employeePassword" class="form-label small fw-bold text-muted">CONTRASEÑA</label>
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0">🔒</span>
+                                <input type="password" id="employeePassword" class="form-control border-start-0 ps-0 bg-light" placeholder="••••••••" required>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-dark w-100 py-2 rounded-pill fw-bold shadow-sm">
+                            Acceder al Dashboard
+                        </button>
+                        
+                        <div class="mt-4 text-center">
+                            <p class="small text-muted mb-0">
+                                ¿Olvidaste tus credenciales? <br>
+                                <a href="#" class="text-decoration-none text-dark fw-bold">Contactar Soporte TI</a>
+                            </p>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+            <div class="text-center mt-3">
+                <small class="text-muted">🔒 Acceso restringido a personal autorizado</small>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Tu script original de redirección (sin cambios)
+        document.getElementById('employeeLoginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Simulación visual de carga (opcional)
+            const btn = this.querySelector('button[type="submit"]');
+            const originalText = btn.innerText;
+            btn.innerText = "Verificando...";
+            btn.disabled = true;
+
+            setTimeout(() => {
+                // Simulación de login exitoso
+                window.location.href = 'dashboard.html';
+            }, 1000); // Pequeño retraso de 1 segundo para realismo
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generar Documento</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body class="bg-light">
+
+    <div class="container py-4">
+        
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8 col-lg-6">
+                
+                <div class="mb-3">
+                    <!-- ÚNICA MODIFICACIÓN: El enlace ahora va a login_cashier.html -->
+                    <a href="login_cashier.html" class="text-decoration-none text-secondary fw-bold">
+                        &larr; Volver
+                    </a>
+                </div>
+
+                <div class="card shadow border-0 rounded-4">
+                    <div class="card-body p-4">
+                        
+                        <h2 class="fw-bold mb-4">Generar Documento</h2>
+
+                        <form id="invoiceForm">
+                            
+                            <div class="mb-4">
+                                <label class="form-label small fw-bold text-muted">TIPO DE COMPROBANTE</label>
+                                <div class="btn-group w-100" role="group">
+                                    <input type="radio" class="btn-check" name="docType" id="boleta" value="ticket" checked autocomplete="off">
+                                    <label class="btn btn-outline-primary" for="boleta">📄 Boleta</label>
+
+                                    <input type="radio" class="btn-check" name="docType" id="factura" value="invoice" autocomplete="off">
+                                    <label class="btn btn-outline-primary" for="factura">🏢 Factura</label>
+                                </div>
+                            </div>
+                            
+                            <h5 class="mb-3 border-bottom pb-2">Datos del Cliente</h5>
+                            
+                            <div class="mb-3">
+                                <label for="docNumber" class="form-label" id="docLabel">Número de Documento (DNI)</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="docNumber" placeholder="Ingrese número" required>
+                                    <button class="btn btn-secondary" type="button">Buscar</button>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4 d-none" id="rucGroup">
+                                <label for="companyName" class="form-label">Razón Social</label>
+                                <input type="text" class="form-control bg-light" id="companyName" placeholder="Nombre de la empresa" readonly>
+                            </div>
+
+                            <h5 class="mb-3 border-bottom pb-2 mt-4">Productos</h5>
+                            
+                            <div class="table-responsive">
+                                <table class="table table-hover align-middle">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Producto</th>
+                                            <th class="text-end">Cant.</th>
+                                            <th class="text-end">Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Libro Coquito</td>
+                                            <td class="text-end">2</td>
+                                            <td class="text-end">15.80</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Plumones Sharpie</td>
+                                            <td class="text-end">1</td>
+                                            <td class="text-end">35.00</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-center bg-primary bg-opacity-10 p-3 rounded mb-4">
+                                <span class="fw-bold text-primary">Total a Pagar:</span>
+                                <span class="fs-4 fw-bold text-primary">S/ 50.80</span>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary w-100 py-2 fs-5 fw-bold rounded-pill">
+                                Emitir Documento
+                            </button>
+
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/dashboard.js"></script>
+
+    <script>
+        const boletaRadio = document.getElementById('boleta');
+        const facturaRadio = document.getElementById('factura');
+        const rucGroup = document.getElementById('rucGroup');
+        const docLabel = document.getElementById('docLabel');
+
+        function toggleDocType() {
+            if (facturaRadio.checked) {
+                rucGroup.classList.remove('d-none'); // Muestra campo empresa
+                docLabel.textContent = "Número de RUC";
+            } else {
+                rucGroup.classList.add('d-none'); // Oculta campo empresa
+                docLabel.textContent = "Número de Documento (DNI)";
+            }
+        }
+
+        boletaRadio.addEventListener('change', toggleDocType);
+        facturaRadio.addEventListener('change', toggleDocType);
+    </script>
+</body>
+</html>

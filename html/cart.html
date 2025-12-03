@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras - Fuente de Vida</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+
+    <style>
+        /* Ajuste para que las imágenes del carrito sean cuadradas y bonitas */
+        .cart-img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body class="bg-light">
+
+    <header class="bg-white shadow-sm sticky-top">
+        <div class="container py-2">
+            
+            <div class="d-flex justify-content-end gap-3 text-muted small mb-2 border-bottom pb-1">
+                <a href="#" class="text-decoration-none text-secondary">Ayuda</a>
+                <a href="#" class="text-decoration-none text-secondary">Locales</a>
+            </div>
+
+            <div class="row align-items-center gy-3">
+                
+                <div class="col-6 col-md-3">
+                    <img src="../images/logo.png" alt="Logo" class="img-fluid" style="max-height: 60px;">
+                </div>
+
+                <div class="col-12 col-md-6 order-3 order-md-2">
+                    <form action="search_results.html" method="GET" class="input-group">
+                        <input type="text" name="query" class="form-control border-end-0" placeholder="Buscar por título, autor o ISBN">
+                        <button class="btn btn-outline-secondary border-start-0 bg-white" type="submit">🔍</button>
+                    </form>
+                </div>
+
+                <div class="col-6 col-md-3 text-end order-2 order-md-3">
+                    <a href="account_client.html" class="btn btn-primary border-0 me-2 position-relative">
+                        👤 <span class="d-none d-lg-inline small ms-1">Mi Cuenta</span>
+                    </a>
+                    <a href="cart.html" class="btn btn-primary position-relative">
+                        🛒 <span class="d-none d-lg-inline small ms-1">Carrito</span>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            3
+                        </span>
+                    </a>
+                </div>
+            </div>
+            </div>
+    </header>
+
+    <div class="container py-5">
+        <h2 class="fw-bold mb-4">Mi Carrito de Compras</h2>
+
+        <div class="row g-4">
+            
+            <div class="col-12 col-lg-8">
+                
+                <div class="card shadow-sm border-0 mb-3">
+                    <div class="card-body">
+                        <div class="row align-items-center gy-3">
+                            <div class="col-4 col-md-2">
+                                <img src="https://media.falabella.com/falabellaPE/136472796_01/public" alt="Producto" class="cart-img img-fluid">
+                            </div>
+                            
+                            <div class="col-8 col-md-4">
+                                <h6 class="fw-bold mb-1">Estimulación Lectora COQUITO</h6>
+                                <p class="text-muted small mb-0">Precio unitario: S/ 7.90</p>
+                            </div>
+
+                            <div class="col-6 col-md-3">
+                                <div class="input-group input-group-sm" style="max-width: 120px;">
+                                    <button class="btn btn-outline-secondary" type="button">-</button>
+                                    <input type="text" class="form-control text-center" value="2">
+                                    <button class="btn btn-outline-secondary" type="button">+</button>
+                                </div>
+                            </div>
+
+                            <div class="col-6 col-md-3 text-end">
+                                <p class="fw-bold mb-1 fs-5">S/ 15.80</p>
+                                <a href="#" class="text-danger small text-decoration-none">Eliminar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card shadow-sm border-0 mb-3">
+                    <div class="card-body">
+                        <div class="row align-items-center gy-3">
+                            <div class="col-4 col-md-2">
+                                <img src="https://plazavea.vteximg.com.br/arquivos/ids/640350-418-418/image-990f74ef2d4d41a88d7ca61e5c1f781a.jpg" alt="Producto" class="cart-img img-fluid">
+                            </div>
+                            
+                            <div class="col-8 col-md-4">
+                                <h6 class="fw-bold mb-1">Marcadores permanentes SHARPIE X12</h6>
+                                <p class="text-muted small mb-0">Precio unitario: S/ 35.00</p>
+                            </div>
+
+                            <div class="col-6 col-md-3">
+                                <div class="input-group input-group-sm" style="max-width: 120px;">
+                                    <button class="btn btn-outline-secondary" type="button">-</button>
+                                    <input type="text" class="form-control text-center" value="1">
+                                    <button class="btn btn-outline-secondary" type="button">+</button>
+                                </div>
+                            </div>
+
+                            <div class="col-6 col-md-3 text-end">
+                                <p class="fw-bold mb-1 fs-5">S/ 35.00</p>
+                                <a href="#" class="text-danger small text-decoration-none">Eliminar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="products.html" class="text-primary text-decoration-none fw-bold mt-3 d-inline-block">
+                    &larr; Seguir comprando
+                </a>
+
+            </div>
+
+            <div class="col-12 col-lg-4">
+                <div class="card shadow border-0 rounded-4">
+                    <div class="card-body p-4">
+                        <h4 class="fw-bold mb-4">Resumen del Pedido</h4>
+                        
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="text-secondary">Subtotal</span>
+                            <span class="fw-bold">S/ 50.80</span>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between mb-3 border-bottom pb-3">
+                            <span class="text-secondary">Envío estimado</span>
+                            <span class="fw-bold">S/ 10.00</span>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between mb-4">
+                            <span class="fs-5 fw-bold">TOTAL</span>
+                            <span class="fs-4 fw-bold text-primary">S/ 60.80</span>
+                        </div>
+                        
+                        <a href="checkout.html" class="btn btn-primary w-100 py-2 rounded-pill fw-bold shadow-sm">
+                            Proceder al Pago
+                        </a>
+
+                        <div class="mt-3 text-center">
+                            <span class="text-muted small">🔒 Compra 100% Segura</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/products.js"></script>
+</body>
+</html>

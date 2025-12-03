@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Cuenta - Perfil de Cliente</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../css/style.css"> 
+
+    <style>
+        /* Estilo para que el avatar se vea bien */
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body class="bg-light">
+
+    <header class="bg-white shadow-sm sticky-top">
+        <div class="container py-2">
+            
+            <div class="d-flex justify-content-end gap-3 text-muted small mb-2 border-bottom pb-1">
+                <a href="#" class="text-decoration-none text-secondary">Ayuda y Contacto</a>
+                <a href="#" class="text-decoration-none text-secondary">Locales</a>
+                <a href="#" class="text-decoration-none text-secondary">Promociones</a>
+            </div>
+
+            <div class="row align-items-center gy-3">
+                <div class="col-6 col-md-3">
+                    <img src="../images/logo.png" alt="Logo" class="img-fluid" style="max-height: 60px;">
+                </div>
+
+               <div class="col-12 col-md-6 order-3 order-md-2">
+    <form action="search_results.html" method="GET" class="input-group">
+        <input type="text" name="query" class="form-control border-end-0" placeholder="Buscar por título, autor o ISBN">
+        <button class="btn btn-outline-secondary border-start-0 bg-white" type="submit">🔍</button>
+    </form>
+</div>
+                <div class="col-6 col-md-3 text-end order-2 order-md-3">
+                    <a href="account_client.html" class="btn btn-primary border-0 me-2 position-relative"> 
+                        👤 <span class="d-none d-lg-inline small ms-1">Mi Cuenta</span>
+                    </a>
+                    <a href="cart.html" class="btn btn-primary position-relative">
+                        🛒 <span class="d-none d-lg-inline small ms-1">Carrito</span>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            3
+                        </span>
+                    </a>
+                </div>
+            </div>
+
+            <nav class="nav nav-pills nav-fill justify-content-center mt-3 small fw-bold">
+                <a class="nav-link text-dark" href="products.html">Libros</a>
+                <a class="nav-link text-dark" href="#">Útiles Escolares</a>
+                <a class="nav-link text-dark" href="#">Juegos Didácticos</a>
+                <a class="nav-link text-dark" href="#">Tecnología</a>
+                <a class="nav-link text-dark" href="#">Regalos y Papelería</a>
+            </nav>
+        </div>
+    </header>
+    <div class="container py-5">
+        
+        <h1 class="fw-bold mb-4 text-dark border-start border-5 border-primary ps-3">Mi Perfil de Cliente</h1>
+
+        <div class="row">
+            <div class="col-md-3 mb-4">
+                <div class="list-group shadow-sm" id="account-nav" role="tablist">
+                    <a class="list-group-item list-group-item-action active" data-bs-toggle="list" href="#profile" role="tab">
+                        👤 Mi Información
+                    </a>
+                    <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#orders" role="tab">
+                        📦 Mis Pedidos
+                    </a>
+                    <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#address" role="tab">
+                        🏠 Direcciones
+                    </a>
+                    <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#security" role="tab">
+                        🔒 Seguridad
+                    </a>
+                    <a class="list-group-item list-group-item-action text-danger" href="../index.html">
+                        🚪 Cerrar Sesión
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                <div class="tab-content">
+                    
+                    <div class="tab-pane fade show active" id="profile" role="tabpanel">
+                        <div class="card shadow-sm border-0 p-4">
+                            <h4 class="card-title fw-bold mb-4">Detalles del Perfil</h4>
+                            <div class="d-flex align-items-center mb-4">
+                                <img src="../images/logo.png" class="rounded-circle me-3 profile-avatar border border-2 border-primary" alt="Logo de Usuario">
+                                <div>
+                                    <h5 class="mb-0">Nombre Completo del Cliente</h5>
+                                    <p class="text-muted mb-0">cliente@prueba.com</p>
+                                </div>
+                            </div>
+                            
+                            <p>Aquí se mostrarán todos tus datos personales. Puedes editar tu nombre y correo electrónico.</p>
+                            <button class="btn btn-sm btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#editProfileModal">Editar Perfil</button>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="orders" role="tabpanel">
+                        <div class="card shadow-sm border-0 p-4">
+                            <h4 class="card-title fw-bold mb-4">Historial de Pedidos</h4>
+                            <div class="alert alert-info">
+                                Actualmente no tienes pedidos recientes.
+                            </div>
+                            <ul class="list-group">
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Pedido #2024001 - Total: S/ 55.00
+                                    <span class="badge bg-success">Entregado</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="address" role="tabpanel">
+                        <div class="card shadow-sm border-0 p-4">
+                            <h4 class="card-title fw-bold mb-4">Mis Direcciones de Envío</h4>
+                            <div class="alert alert-warning">
+                                Agrega una dirección para facilitar tus compras.
+                            </div>
+                            </div>
+                    </div>
+                    
+                    <div class="tab-pane fade" id="security" role="tabpanel">
+                        <div class="card shadow-sm border-0 p-4">
+                            <h4 class="card-title fw-bold mb-4">Cambiar Contraseña</h4>
+                            <p class="text-muted">Utiliza una contraseña fuerte para proteger tu cuenta.</p>
+                            </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>
