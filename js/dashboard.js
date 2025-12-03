@@ -121,13 +121,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Descargar el PDF
             doc.save(`Comprobante_${serie}.pdf`);
-
-            // Redirigir (opcional, le puse un delay para que se vea la descarga)
-            setTimeout(() => {
-                 if(confirm("Comprobante descargado. ¿Volver al Dashboard?")) {
-                     window.location.href = 'dashboard.html'; // Asegúrate que este archivo exista
-                 }
-            }, 1000);
         });
     }
 });
