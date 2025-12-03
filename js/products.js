@@ -31,7 +31,7 @@ if (checkoutForm) {
         doc.setFontSize(20);
         doc.text("COMPROBANTE DE PAGO", 105, 20, null, null, "center");
         doc.setFontSize(10);
-        doc.text("Tienda Online Prototipo", 105, 26, null, null, "center");
+        doc.text("FUENTE DE LA VIDA - Libreria", 105, 26, null, null, "center");
         doc.text(`Fecha: ${new Date().toLocaleDateString()} - Hora: ${new Date().toLocaleTimeString()}`, 105, 32, null, null, "center");
 
         // Línea divisoria
